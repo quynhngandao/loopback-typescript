@@ -1,8 +1,13 @@
-function LoggerAndReturn(thing) {
-    return thing;
+var Customer = /** @class */ (function () {
+    function Customer(fname, lname) {
+        this.firstName = fname;
+        this.lastName = lname;
+    }
+    return Customer;
+}());
+function customerLogger(customer) {
+    console.log("".concat(customer.firstName, " ").concat(customer.lastName));
 }
-// const message: string = LoggerAndReturn<string>('Hello world');
-var message = LoggerAndReturn('Hello world');
-var message2 = LoggerAndReturn(2);
-console.log(message);
-console.log(message2);
+var customer = new Customer('Jane', 'Doe');
+// customerLogger(customer);
+customerLogger('Jane Doe'); // compiler error 
