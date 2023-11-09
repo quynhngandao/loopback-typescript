@@ -1,9 +1,12 @@
-function LoggerAndReturn<T>(thing: T) : T {
-    return thing;
+function log(target, key, descriptor){
+    console.log(`${key} was called`);
 }
 
-// const message: string = LoggerAndReturn<string>('Hello world');
-const message: string = LoggerAndReturn('Hello world');
-const message2: number = LoggerAndReturn(2)
-console.log(message);
-console.log(message2);
+class Calculator {
+    // using the decorator @log
+
+    @log
+    square(n:number){
+        return n*n;
+    }
+}
