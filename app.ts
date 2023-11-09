@@ -45,3 +45,12 @@ function checkElementAt<T>(
     console.log(b); // false, at index 1, it is 3 not 5
     let b2: boolean = checker<number>(items, 5,2);
     console.log(b2); // true , at index of 2, it is 5
+
+    // interface describing indexables 
+    interface States<R> {
+        [state:string]:R;
+    }
+
+    let s: States<boolean> = {enabled: true, maximized:false};
+    console.log(s);
+    console.log(s['maximized']);
