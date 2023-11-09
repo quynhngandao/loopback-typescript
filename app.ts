@@ -1,9 +1,26 @@
-function LoggerAndReturn<T>(thing: T) : T {
-    return thing;
+// interfaces describing object properties 
+interface Pair<T, U> {
+    first: T;
+    second: U;
 }
 
-// const message: string = LoggerAndReturn<string>('Hello world');
-const message: string = LoggerAndReturn('Hello world');
-const message2: number = LoggerAndReturn(2)
-console.log(message);
-console.log(message2);
+let p: Pair<string, number>= {first: '10K', second:1000};
+console.log(p);
+const person: Pair<string, string> = {first: 'Jane', second: 'Malik'}
+console.log(person);
+
+
+interface Command<T, R>{
+    id: T;
+    run(): R;
+}
+
+let c: Command<string, number> = {
+    id: Math.random().toString(36),
+    run: function() {
+        return 3;
+    }
+};
+
+console.log(c.id);
+console.log(c.run());

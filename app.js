@@ -1,8 +1,12 @@
-function LoggerAndReturn(thing) {
-    return thing;
-}
-// const message: string = LoggerAndReturn<string>('Hello world');
-var message = LoggerAndReturn('Hello world');
-var message2 = LoggerAndReturn(2);
-console.log(message);
-console.log(message2);
+var p = { first: '10K', second: 1000 };
+console.log(p);
+var person = { first: 'Jane', second: 'Malik' };
+console.log(person);
+var c = {
+    id: Math.random().toString(36),
+    run: function () {
+        return 3;
+    }
+};
+console.log(c.id);
+console.log(c.run());
