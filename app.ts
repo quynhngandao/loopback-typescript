@@ -21,9 +21,18 @@ function property(target: any, key: string) {
     });
   }
 }
+function parameterDecorator(target:any, key:string, index:number){
+  console.log(`Key is ${key} and index is ${index}`);
+}
 class Person {
   @property // decorator
   public firstName: string;
+  @property // decorator
+  public salary: number;
+
+  calculatorSalary(@parameterDecorator taxes: number): number {
+    return this.salary + taxes;
+  }
 }
 
 const person = new Person();

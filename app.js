@@ -4,6 +4,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 function property(target, key) {
     var value = target[key];
     // replacement getter
@@ -27,12 +30,24 @@ function property(target, key) {
         });
     }
 }
+function parameterDecorator(target, key, index) {
+    console.log("Key is ".concat(key, " and index is ").concat(index));
+}
 var Person = /** @class */ (function () {
     function Person() {
     }
+    Person.prototype.calculatorSalary = function (taxes) {
+        return this.salary + taxes;
+    };
     __decorate([
         property // decorator
     ], Person.prototype, "firstName", void 0);
+    __decorate([
+        property // decorator
+    ], Person.prototype, "salary", void 0);
+    __decorate([
+        __param(0, parameterDecorator)
+    ], Person.prototype, "calculatorSalary", null);
     return Person;
 }());
 var person = new Person();
