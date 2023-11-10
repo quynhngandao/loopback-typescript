@@ -1,9 +1,27 @@
-function LoggerAndReturn<T>(thing: T) : T {
-    return thing;
+function log(target, key, descriptor) {
+  const original = descriptor.value;
+  descriptor.value = function (...args: any[]) {
+    // call the origin method
+    const result = original.apply(this, args);
+    // log the call, and the result
+    console.log(`${key} with args ${JSON.stringify(args)} returned
+        ${JSON.stringify(result)}`);
+    // return the result
+    return result;
+  };
+  return descriptor;
 }
 
-// const message: string = LoggerAndReturn<string>('Hello world');
-const message: string = LoggerAndReturn('Hello world');
-const message2: number = LoggerAndReturn(2)
-console.log(message);
-console.log(message2);
+class Calculator {
+  // Using thing decorator @log
+  @log
+  square(n: number) {
+    return n * n;
+  }
+}
+
+const calculator = new Calculator();
+// square with args [2] returned 4
+calculator.square(2);
+// square with args [3] returned 9 
+calculator.square(3);

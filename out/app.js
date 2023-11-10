@@ -37,3 +37,4 @@ var calculator = new Calculator();
 calculator.square(2);
 // square with args [3] returned 9 
 calculator.square(3);
+//# sourceMappingURL=app.js.map
