@@ -24,6 +24,11 @@ function property(target: any, key: string) {
 function parameterDecorator(target:any, key:string, index:number){
   console.log(`Key is ${key} and index is ${index}`);
 }
+
+function model(constructor: function){
+  console.log(constructor);
+}
+@model
 class Person {
   @property // decorator
   public firstName: string;
