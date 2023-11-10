@@ -31,3 +31,4 @@ const person = new Person();
 person.firstName = "Haider";
 // call the getter
 console.log(person.firstName);
+
