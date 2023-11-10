@@ -1,29 +1,33 @@
-function log(title: string) {
-    return function(target, key, descriptor) {
-  const original = descriptor.value;
-  descriptor.value = function (...args: any[]) {
-    // call the origin method
-    const result = original.apply(this, args);
-    // log the call, and the result
-    console.log(`title ${title} ${key} with args ${JSON.stringify(args)} returned
-        ${JSON.stringify(result)}`);
-    // return the result
-    return result;
+function property(target: any, key: string) {
+  let value = target[key];
+  // replacement getter
+  const getter = function () {
+    console.log(`Getter for ${key} returned ${value}`);
+    return value;
   };
-  return descriptor;
-};
-}
-
-class Calculator {
-  // Using thing decorator @log
-  @log('Calculator')
-  square(n: number) {
-    return n * n;
+  // replacement setter
+  const setter = function (newVal) {
+    console.log(`Set ${key} to ${newVal}`);
+    value = newVal;
+  };
+  // replace the property
+  const isDeleted = delete this[key];
+  if (isDeleted) {
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter,
+      enumerable: true,
+      configurable: true,
+    });
   }
 }
+class Person {
+  @property // decorator
+  public firstName: string;
+}
 
-const calculator = new Calculator();
-// square with args [2] returned 4
-calculator.square(2);
-// square with args [3] returned 9 
-calculator.square(3);
+const person = new Person();
+// set the firstName
+person.firstName = "Haider";
+// call the getter
+console.log(person.firstName);
